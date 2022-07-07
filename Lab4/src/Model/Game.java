@@ -232,4 +232,8 @@ public class Game implements IGame {
         return num_jugadores.equals(g.num_jugadores) && mazo.equals(g.mazo) && jugadores.equals(g.jugadores) && estado.equals(g.estado);
     }
     
+    public Areajuego Getarea(){
+        return area;
+    }
+    
 }

@@ -54,7 +54,7 @@ public class Areajuego {
      * Transforma la información de la clase en un string para poder entregaeselo al usuraio
      * @return String
      */
-    protected String areat_string(){
+    public String areat_string(){
         ArrayList<String> area_string = new ArrayList<>();
         for(Integer i =0; i<this.area.size(); i++){
             Carta carta1 = this.area.get(i);
