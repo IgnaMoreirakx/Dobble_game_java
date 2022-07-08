@@ -10,6 +10,9 @@ import java.awt.HeadlessException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import Model.Areajuego;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JColorChooser;
 
 /**
  *
@@ -24,10 +27,18 @@ public class Playing extends javax.swing.JFrame {
     public Playing() {
         
         initComponents();
-        Turno.setSize(33, 22);
-        Turno.setText("Le corresponde jugar a " + CrearGame.game.dequieneselturno());
-        Mostrarmazo.setText("Las cartas sobre el área son: \n" + CrearGame.a1.areat_string());
-        Estado.setText(CrearGame.game.toString());
+        Mostrartuno.setText("Le corresponde jugar a " + CrearGame.game.dequieneselturno());
+        mostrarcartas.setText("Las cartas sobre el área son: \n" + CrearGame.a1.areat_string());
+        
+        Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
+        Estado.setEditable(false);
+        mostrarcartas.setEditable(false);
+        if((CrearMazo.mazo.getcartas().size() == 1 || CrearMazo.mazo.getcartas().isEmpty()) && CrearGame.a1.getArea().isEmpty()){
+            CrearGame.game.finish();
+            Mostrartuno.setText("Partida terminada!!!");
+            Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
+            JOptionPane.showMessageDialog(null, "El Ganador es: \n" + CrearGame.game.ganador()); 
+        }
     }
 
     /**
@@ -39,19 +50,62 @@ public class Playing extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Turno = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Mostrarmazo = new javax.swing.JTextPane();
+        Estado = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        mostrarcartas = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        Mostrartuno = new javax.swing.JLabel();
         Spoit = new javax.swing.JButton();
         Pass = new javax.swing.JButton();
         Finish = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        Estado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(244, 241, 187));
 
-        jScrollPane1.setViewportView(Mostrarmazo);
+        jPanel1.setBackground(new java.awt.Color(155, 193, 188));
 
+        Estado.setEditable(false);
+        Estado.setBackground(new java.awt.Color(155, 193, 188));
+        Estado.setColumns(20);
+        Estado.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        Estado.setLineWrap(true);
+        Estado.setRows(5);
+        Estado.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jScrollPane1.setViewportView(Estado);
+
+        mostrarcartas.setBackground(new java.awt.Color(244, 241, 187));
+        mostrarcartas.setColumns(20);
+        mostrarcartas.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        mostrarcartas.setRows(5);
+        mostrarcartas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jScrollPane2.setViewportView(mostrarcartas);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jScrollPane2)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(244, 241, 187));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        Mostrartuno.setBackground(new java.awt.Color(244, 241, 187));
+        Mostrartuno.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        Spoit.setBackground(new java.awt.Color(155,193,188));
         Spoit.setText("Spoit");
         Spoit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +113,7 @@ public class Playing extends javax.swing.JFrame {
             }
         });
 
+        Pass.setBackground(new java.awt.Color(155, 193, 188));
         Pass.setText("Pass");
         Pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +121,7 @@ public class Playing extends javax.swing.JFrame {
             }
         });
 
+        Finish.setBackground(new java.awt.Color(155, 193, 188));
         Finish.setText("finish");
         Finish.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,59 +129,62 @@ public class Playing extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("¿Qué jugada quieres hacer?");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Mostrartuno, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Finish, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Spoit, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(185, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(Mostrartuno, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Spoit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Finish, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Estado, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(Spoit, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(145, 145, 145)
-                            .addComponent(Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Finish, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(Turno, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(Turno, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Estado, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 53, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Spoit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Finish, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SpoitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpoitActionPerformed
         // TODO add your handling code here:
-        Estado.setText(CrearGame.game.toString());
+        Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
+        if((CrearMazo.mazo.getcartas().size() == 1 || CrearMazo.mazo.getcartas().isEmpty()) && CrearGame.a1.getArea().isEmpty()){
+            CrearGame.game.finish();
+            Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
+            JOptionPane.showMessageDialog(null, "El Ganador es: \n" + CrearGame.game.ganador()); 
+        }
+        
         ViewSpoit ventanaspoit = new ViewSpoit();
         ventanaspoit.setVisible(true);
         this.setVisible(false);
@@ -134,19 +193,23 @@ public class Playing extends javax.swing.JFrame {
     }//GEN-LAST:event_SpoitActionPerformed
 
     private void PassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PassActionPerformed
-        // TODO add your handling code here:
-        Estado.setText(CrearGame.game.toString());
+        if((CrearMazo.mazo.getcartas().size() == 1 || CrearMazo.mazo.getcartas().isEmpty()) && CrearGame.a1.getArea().isEmpty()){
+            CrearGame.game.finish();
+            Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
+            JOptionPane.showMessageDialog(null, "El Ganador es: \n" + CrearGame.game.ganador()); 
+        }
         CrearGame.game.pass();
-        JOptionPane.showMessageDialog(null, "El juego es: \n" + CrearGame.game.toString());
-        Turno.setText("Le corresponde jugar a " + CrearGame.game.dequieneselturno());
+         Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
+        Mostrartuno.setText("Le corresponde jugar a " + CrearGame.game.dequieneselturno());
     }//GEN-LAST:event_PassActionPerformed
 
     private void FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinishActionPerformed
         // TODO add your handling code here:
-        Estado.setText(CrearGame.game.toString());
+        
         CrearGame.game.finish();
-        JOptionPane.showMessageDialog(null, "El juego es: \n" + CrearGame.game.toString());
-        Turno.setText("Le corresponde jugar a " + CrearGame.game.dequieneselturno());
+        Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
+        JOptionPane.showMessageDialog(null, "El Ganador es: \n" + CrearGame.game.ganador());
+        
     }//GEN-LAST:event_FinishActionPerformed
 
  
@@ -158,13 +221,15 @@ public class Playing extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Estado;
+    private javax.swing.JTextArea Estado;
     private javax.swing.JButton Finish;
-    private javax.swing.JTextPane Mostrarmazo;
+    private javax.swing.JLabel Mostrartuno;
     private javax.swing.JButton Pass;
     private javax.swing.JButton Spoit;
-    private javax.swing.JLabel Turno;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea mostrarcartas;
     // End of variables declaration//GEN-END:variables
 }

@@ -69,7 +69,7 @@ public class Areajuego {
      * Obtiene el área de juego para operar sobre esta en otra clase.
      * @return Área de juego
      */
-    protected ArrayList<Carta> getArea() {
+    public ArrayList<Carta> getArea() {
         return area;
     }
     

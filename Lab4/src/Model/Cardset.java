@@ -34,7 +34,7 @@ public class Cardset implements ICardset  {
      */
     private ArrayList <Carta> cartas_aux = new ArrayList<>();
     
-    public Cardset(int E, int C, ArrayList<String> simbolos) {
+    public Cardset(int E, Integer C, ArrayList<String> simbolos) {
         /**
          * Crea una nueva instacia de mazo dando los parametros requeridos
          */
@@ -81,12 +81,23 @@ public class Cardset implements ICardset  {
         ArrayList<Carta> cartas_finales_aux = new ArrayList<>();
         cartas_finales_aux = cartas;
         ArrayList<Carta> cartas_finales= new ArrayList<>();
-        for (i= 0; i<C; i++){
+        
+        Integer R = -1;
+        if (C.equals(R)){
+            for (i= 0; i<(n*n +n +1); i++){
+            cartas_finales.add(cartas.get(i));
+        }
+        this.cartas = cartas_finales;
+        Collections.shuffle(this.cartas);
+        }
+        
+        if(!(C ==-1)){
+            for (i= 0; i<C; i++){
             cartas_finales.add(cartas.get(i));
         }
         cartas = cartas_finales;
         Collections.shuffle(cartas);
-           
+        }  
     }
     
     /**

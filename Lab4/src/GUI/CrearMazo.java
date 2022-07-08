@@ -7,6 +7,7 @@ package GUI;
 
 import java.util.ArrayList;
 import Model.Cardset;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 /**
  *
@@ -20,6 +21,7 @@ public class CrearMazo extends javax.swing.JFrame {
     public static Cardset mazo;
     public CrearMazo() {
         initComponents();
+        
     }
 
     /**
@@ -40,9 +42,13 @@ public class CrearMazo extends javax.swing.JFrame {
         getE = new javax.swing.JTextField();
         Vermazo = new javax.swing.JButton();
         Entreamigos = new javax.swing.JButton();
-        vscpu = new javax.swing.JButton();
+        Ayudaprimo = new javax.swing.JButton();
+        ayudacartas = new javax.swing.JButton();
+        ayudasimbolos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 204, 204));
+        setForeground(new java.awt.Color(0, 204, 204));
 
         jLabel2.setText("¿Cuántas cartas quiere que tenga el mazo?");
 
@@ -77,10 +83,24 @@ public class CrearMazo extends javax.swing.JFrame {
             }
         });
 
-        vscpu.setText("Contra la cpu");
-        vscpu.addActionListener(new java.awt.event.ActionListener() {
+        Ayudaprimo.setText("?");
+        Ayudaprimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vscpuActionPerformed(evt);
+                AyudaprimoActionPerformed(evt);
+            }
+        });
+
+        ayudacartas.setText("?");
+        ayudacartas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ayudacartasActionPerformed(evt);
+            }
+        });
+
+        ayudasimbolos.setText("?");
+        ayudasimbolos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ayudasimbolosActionPerformed(evt);
             }
         });
 
@@ -94,24 +114,29 @@ public class CrearMazo extends javax.swing.JFrame {
                         .addGap(232, 232, 232)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(getE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                                .addComponent(getC)
-                                .addComponent(getsimbolos))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(getE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                                    .addComponent(getC)
+                                    .addComponent(getsimbolos))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ayudasimbolos, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(ayudacartas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Ayudaprimo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(278, 278, 278)
                         .addComponent(Ingresarparametos, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(56, 56, 56)
                 .addComponent(Vermazo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Entreamigos, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(138, 138, 138)
-                .addComponent(vscpu, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,26 +144,32 @@ public class CrearMazo extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(getE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(getE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Ayudaprimo))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(getC, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(getC, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ayudacartas))
                 .addGap(39, 39, 39)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(getsimbolos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(getsimbolos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ayudasimbolos))
                 .addGap(18, 18, 18)
                 .addComponent(Ingresarparametos, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Vermazo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Entreamigos, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vscpu, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69))
+                    .addComponent(Vermazo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(77, 77, 77))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void getsimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getsimbolosActionPerformed
@@ -159,6 +190,11 @@ public class CrearMazo extends javax.swing.JFrame {
         }
 
         mazo = new Cardset(numE, numC, simbolos);
+        if(!(mazo.isdobble())){
+            JOptionPane.showMessageDialog(null, "El mazo no es válido\n Tienen que ingresar un numero primo y simbolos que no se repitan");
+            mazo = null;
+        }
+       
         
     }//GEN-LAST:event_IngresarparametosActionPerformed
 
@@ -171,28 +207,45 @@ public class CrearMazo extends javax.swing.JFrame {
         CrearGame creargame = new CrearGame();
         creargame.setVisible(true);
         this.setVisible(false);
+       
+      
     }//GEN-LAST:event_EntreamigosActionPerformed
+
+    private void AyudaprimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AyudaprimoActionPerformed
+        JOptionPane.showMessageDialog(null, "Tiene que ser un número primo más 1\n Ejemplo 3(primo) + 1 = 4 número valido");
+    }//GEN-LAST:event_AyudaprimoActionPerformed
+
+    private void ayudacartasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudacartasActionPerformed
+        this.numE = Integer.valueOf(getE.getText());
+        Integer e = this.numE-1;
+        Integer maxcartas = e*e + e +1;
+        JOptionPane.showMessageDialog(null, "Pueden ser máximo " + maxcartas.toString()+" cartas\n Puede ingresar -1 y obtendrá el total de las cartas");
+    }//GEN-LAST:event_ayudacartasActionPerformed
+
+    private void ayudasimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudasimbolosActionPerformed
+        this.numE = Integer.valueOf(getE.getText());
+        Integer e = this.numE-1;
+        Integer maxcartas = e*e + e +1;
+        JOptionPane.showMessageDialog(null, "Tienen que ser como mínimo"+ maxcartas.toString()+ " simbolos, además todos deben ser diferente");
+    }//GEN-LAST:event_ayudasimbolosActionPerformed
 
  
     
     
-    private void vscpuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vscpuActionPerformed
-        Contracpu contracpu = new Contracpu();
-        contracpu.setVisible(true);
-    }//GEN-LAST:event_vscpuActionPerformed
-
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Ayudaprimo;
     private javax.swing.JButton Entreamigos;
     private javax.swing.JButton Ingresarparametos;
     private javax.swing.JButton Vermazo;
+    private javax.swing.JButton ayudacartas;
+    private javax.swing.JButton ayudasimbolos;
     private javax.swing.JTextField getC;
     private javax.swing.JTextField getE;
     private javax.swing.JTextField getsimbolos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton vscpu;
     // End of variables declaration//GEN-END:variables
 }

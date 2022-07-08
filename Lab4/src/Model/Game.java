@@ -220,7 +220,7 @@ public class Game implements IGame {
             nombrej.add(jugadores.get(i).toString());
             }
         String jugadoresstring = String.join("\r\n", nombrej);
-        return jugadoresstring + "\r\nNUMERO DE CARTAS EN EL MAZO: " + cantidad_cartas + "\r\nCARTAS SOBRE EL AREA: " + area2 + "\r\nESTADO: " + estado + "\r\nMODO: " + modo + "\r\n" +resultado ;
+        return jugadoresstring + "\nNUMERO DE CARTAS EN EL MAZO: " + cantidad_cartas + "\nCARTAS SOBRE EL AREA: " + area2 + "\nESTADO: " + estado + "\nMODO: " + modo + "\n" +resultado ;
     }
     
     /**
@@ -234,6 +234,23 @@ public class Game implements IGame {
     
     public Areajuego Getarea(){
         return area;
+    }
+    
+    public String getJugadores(){
+        ArrayList<String> nombrej= new ArrayList<>();
+        for(Integer i = 0; i<jugadores.size();i++){
+            nombrej.add(jugadores.get(i).toString());
+            }
+        String jugadoresstring = String.join("\r\n", nombrej);
+        return jugadoresstring;
+    }
+    
+    public String getEstado(){
+        return this.estado;
+    }
+    
+    public String getModo(){
+        return this.modo;
     }
     
 }
