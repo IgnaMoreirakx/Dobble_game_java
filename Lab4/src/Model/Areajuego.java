@@ -11,7 +11,7 @@ public class Areajuego {
     /**
      * representa las cartas que estarán sobre el area de juego.
      */
-    ArrayList<Carta> area = new ArrayList<>();
+    private ArrayList<Carta> area;  
 
     
     
@@ -19,6 +19,7 @@ public class Areajuego {
      * crea una instancia de la clase area de juego
      */
     public Areajuego() {
+        this.area = new ArrayList<>();  //agregación
         
     }
     
@@ -27,7 +28,7 @@ public class Areajuego {
      * @param cs Mazo correspondiente al juego creado
      * @return 2 cartas sobre el area de juego
      */
-    protected ArrayList agregarcartas(Cardset cs){
+    public void agregarcartas(Cardset cs){          //antes estaba arraylit
         if(cs.getcartas().size()>=2){
              
             this.area.add(cs.nthcard(0));
@@ -35,9 +36,9 @@ public class Areajuego {
             cs.borrar_carta(cs.nthcard(0));
             cs.borrar_carta(cs.nthcard(0));
             
-            return this.area;
+            
         }
-        return this.area;
+        
     }
     
     
@@ -45,9 +46,9 @@ public class Areajuego {
      * Elimina las cartas ya usadas del área de juego
      * @return el área d ejuego vacía
      */
-    protected ArrayList<Carta> eliminarcartas(){
+    public void eliminarcartas(){
         this.area.clear();
-        return area;
+        ;
     }
     
     /**
@@ -70,7 +71,7 @@ public class Areajuego {
      * @return Área de juego
      */
     public ArrayList<Carta> getArea() {
-        return area;
+        return this.area;
     }
     
     /**

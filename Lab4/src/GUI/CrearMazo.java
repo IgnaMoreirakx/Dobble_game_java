@@ -14,14 +14,28 @@ import javax.swing.JOptionPane;
  * @author ignac
  */
 public class CrearMazo extends javax.swing.JFrame {
-
+    /**
+     * Corresponde a la cantidad de elementos en cada carta
+     */
     private Integer numE;
+    
+    /**
+     * Corresponde a la cantidad de cartas dentro del mazo
+     */
     private Integer numC;
+    
+    /**
+     * representa los simbolos que tendrán las cartas
+     */
     private ArrayList<String> simbolos;
+    
+    /**
+     * Corresponde al mazo que se creara para jugar
+     */
     public static Cardset mazo;
+    
     public CrearMazo() {
         initComponents();
-        
     }
 
     /**
@@ -211,6 +225,13 @@ public class CrearMazo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_getsimbolosActionPerformed
 
+    
+    /**
+     * Corresponde al evento de hacer click en el boton,
+     * recolecta la información entregada por el usuario
+     * para crear el mazo de cartas
+     * @param evt 
+     */
     private void IngresarparametosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarparametosActionPerformed
         // TODO add your handling code here:
         this.simbolos = new ArrayList<>();
@@ -224,7 +245,8 @@ public class CrearMazo extends javax.swing.JFrame {
         for(Integer i = 0; i < maxCartas ; i++){
             this.simbolos.add(ss[i]);
         }
-
+        
+    
         mazo = new Cardset(numE, numC, simbolos);
         if(!(mazo.isdobble())){
             JOptionPane.showMessageDialog(null, "El mazo no es válido\n Tienen que ingresar un numero primo y simbolos que no se repitan");
@@ -234,10 +256,19 @@ public class CrearMazo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_IngresarparametosActionPerformed
 
+    /**
+     * Componente y evento que permite ver en forma de string el mazo una vez creado
+     * @param evt 
+     */
     private void VermazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VermazoActionPerformed
         JOptionPane.showMessageDialog(null, "Su mazo es: \n" + mazo.cardset_string());
     }//GEN-LAST:event_VermazoActionPerformed
 
+    /**
+     * Componente y evento encargado de crear una nueva instancia de CrearGame
+     * y hacer visible la nueva ventana
+     * @param evt 
+     */
     private void EntreamigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntreamigosActionPerformed
         
         CrearGame creargame = new CrearGame();
@@ -247,10 +278,18 @@ public class CrearMazo extends javax.swing.JFrame {
       
     }//GEN-LAST:event_EntreamigosActionPerformed
 
+    /**
+     * Componente y evento encargado de ayudar al usuario a ingresar parametro correcto
+     * @param evt 
+     */
     private void AyudaprimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AyudaprimoActionPerformed
         JOptionPane.showMessageDialog(null, "Tiene que ser un número primo más 1\n Ejemplo 3(primo) + 1 = 4 número valido");
     }//GEN-LAST:event_AyudaprimoActionPerformed
 
+    /**
+     * Componente y evento encargado de ayudar al usuario a ingresar parametro correcto
+     * @param evt 
+     */
     private void ayudacartasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudacartasActionPerformed
         this.numE = Integer.valueOf(getE.getText());
         Integer e = this.numE-1;
@@ -258,6 +297,11 @@ public class CrearMazo extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Pueden ser máximo " + maxcartas.toString()+" cartas\n Puede ingresar -1 y obtendrá el total de las cartas");
     }//GEN-LAST:event_ayudacartasActionPerformed
 
+    
+    /**
+     * Componente y evento encargado de ayudar al usuario a ingresar parametro correcto
+     * @param evt 
+     */
     private void ayudasimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudasimbolosActionPerformed
         this.numE = Integer.valueOf(getE.getText());
         Integer e = this.numE-1;

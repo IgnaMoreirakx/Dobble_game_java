@@ -25,12 +25,12 @@ public class Game implements IGame {
     /**
      * Representa el mazo correspondiente a la partida de juego.
      */
-    protected Cardset mazo;
+    private Cardset mazo;
     
     /**
      * Representa el área de juego una vez que se inicie la partida.
      */
-    protected Areajuego area;
+    private Areajuego area;
     
     /**
      * Da a conocer el estado del juego.
@@ -40,7 +40,7 @@ public class Game implements IGame {
     /**
      * Da a conocer el modo del juego, para este efecto el modo siempre será "Stackmode".
      */
-    protected String modo;
+    private String modo;
     
     /**
      * Corresponde a entregar al juagdor ganador o bien, decir cuando hay un empate.
@@ -48,14 +48,14 @@ public class Game implements IGame {
     private String resultado;
 
    
-    public Game(Integer num_jugadores, Cardset mazo, Areajuego area, String estado, String modo) {
+    public Game(Integer num_jugadores, Cardset mazo, String estado, String modo) {
         /**
          * Instancia para crear una nueva partida de juego, indicando todos sus atributos necesarios.
          */
-        this.jugadores = new ArrayList<>();
-        this.mazo = mazo;
-        this.num_jugadores = num_jugadores;
-        this.area = area;
+        this.jugadores = new ArrayList<>(); //agregacion
+        this.mazo = mazo;                  // agregación 
+        this.num_jugadores = num_jugadores; 
+        this.area = new Areajuego();                   //composicion
         this.estado = estado;
         this.modo = "stackmode";
         this.resultado = "no terminado";

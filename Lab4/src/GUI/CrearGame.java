@@ -5,7 +5,8 @@
  */
 package GUI;
 
-import Model.Areajuego;
+
+import Model.Cardset;
 import Model.Game;
 import Model.Jugador;
 import java.util.ArrayList;
@@ -17,11 +18,25 @@ import javax.swing.JOptionPane;
  */
 public class CrearGame extends javax.swing.JFrame {
 
-
+    /**
+     * Corresponde al objeto del tipo Game que contiene la estructura del juego actual.
+     */
     public static Game game;
-    Integer numJ;
-    ArrayList<Jugador> jugadores = new ArrayList <>();
-    public static Areajuego a1;
+    
+    /**
+     * Representa la cantidad de juagdores que participaran del juego.
+     */
+    private Integer numJ;
+    
+    /**
+     * Representa una lista con los jugadores que van a jugar.
+     */
+    private ArrayList<Jugador> jugadores;
+    
+    /**
+     * Objeto del tipo Cardset creado con anterioridad
+     */
+    private Cardset mazo = CrearMazo.mazo;
 
     public CrearGame() {
         initComponents();
@@ -136,11 +151,16 @@ public class CrearGame extends javax.swing.JFrame {
   
     }//GEN-LAST:event_getnumjActionPerformed
 
+    /**
+     * Componente y evento que recolecta los parametros ingresados por el usuario
+     * para posteriormente crear el juego actual y registrar a los jugadores
+     * @param evt 
+     */
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
         try{
+            this.jugadores = new ArrayList <>();
             this.numJ = Integer.valueOf(getnumj.getText());
-            a1 = new Areajuego();
-            game = new Game(this.numJ, CrearMazo.mazo, a1, "iniciado", "");
+            game = new Game(this.numJ, this.mazo, "iniciado", "");
         
             String texto = GetNombres.getText();
             String[] ss = texto.split(" ");

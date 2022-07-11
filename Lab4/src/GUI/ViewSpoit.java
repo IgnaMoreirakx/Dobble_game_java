@@ -6,6 +6,9 @@
 package GUI;
 
 
+import Model.Game;
+
+
 
 /**
  *
@@ -14,11 +17,16 @@ package GUI;
 public class ViewSpoit extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewSpoit
+     * Objeto del tipo Game creado con anterioridad
      */
+    private Game game = CrearGame.game;
     public ViewSpoit() {
         initComponents();
-        Mostrararea.setText(CrearGame.a1.areat_string());
+        
+        /**
+         * Muestra las cartas que estan sobre el área de juego.
+         */
+        Mostrararea.setText(this.game.Getarea().areat_string());
     }
 
     /**
@@ -130,9 +138,15 @@ public class ViewSpoit extends javax.swing.JFrame {
         
     }//GEN-LAST:event_GetcomunActionPerformed
 
+    /**
+     * Componente y evento que recolectan el simbolo igresado por el usuario
+     * y efectuan con dicho simbolo la jugada Spoit sobre el juego actual,
+     * cerrar la ventana y volver a la anterior.
+     * @param evt 
+     */
     private void ComprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprobarActionPerformed
         String encomun = Getcomun.getText();
-        CrearGame.game.spotit(encomun);
+        this.game.spotit(encomun);
         
         Playing devolver = new Playing();
         devolver.setVisible(true);

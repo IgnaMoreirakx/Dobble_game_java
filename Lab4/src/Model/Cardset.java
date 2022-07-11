@@ -27,52 +27,58 @@ public class Cardset implements ICardset  {
     /**
      * Representa el mazo final que se le entregará al usuario y al juego
      */
-    private ArrayList <Carta> cartas = new ArrayList<>();
+    private Carta ncartas;
     
     /**
      * Representa un mazo auxiliar para realizar distintas funcionalidades obligatorias, ejemplo Missingcard
      */
-    private ArrayList <Carta> cartas_aux = new ArrayList<>();
+    private Carta primeracarta;
     
-    public Cardset(int E, Integer C, ArrayList<String> simbolos) {
+    private Carta nncartas;
+    
+    private ArrayList<Carta> cartas = new ArrayList<>();   
+    private ArrayList<Carta> cartas_aux = new ArrayList<>();
+    
+    public Cardset(Integer E, Integer C, ArrayList<String> simbolos) {
         /**
          * Crea una nueva instacia de mazo dando los parametros requeridos
          */
+        
         this.C = C;
         this.E = E;
         Integer n = E-1;
         this.simbolos = simbolos;
         ArrayList<Integer> c1aux = new ArrayList<>();
-        Carta primeracarta = new Carta();
+        this.primeracarta = new Carta();           //composición
         int i, j, k;
         for (i = 1; i<= n+1; i++) {
             String aux = simbolos.get(i);
-            primeracarta.getcarta().add(aux);
+            this.primeracarta.getcarta().add(aux);
 
         }
-        cartas.add(primeracarta);
+        cartas.add(this.primeracarta);
 
         
         for (j=1; j<=n; j++) {
-            Carta ncartas = new Carta();
-            ncartas.getcarta().add(simbolos.get(1));
+            this.ncartas = new Carta();
+            this.ncartas.getcarta().add(simbolos.get(1));
     
             for (k=1; k<=n; k++) {
                 String aux2 = simbolos.get(n * j + (k+1));
-                ncartas.getcarta().add(aux2);
+                this.ncartas.getcarta().add(aux2);
             }
-            cartas.add(ncartas);
+            cartas.add(this.ncartas);
 
             //ncartas.getcarta().clear();
         }
         for (i= 1; i<=n; i++) {
             for (j=1; j<=n; j++){
-                Carta nncartas = new Carta();
-                nncartas.getcarta().add(simbolos.get(i+1));
+                this.nncartas = new Carta();
+                this.nncartas.getcarta().add(simbolos.get(i+1));
                 for (k=1; k<= n; k++) {
-                    nncartas.getcarta().add(simbolos.get(n+2+n*(k-1)+(((i-1)*(k-1)+j-1)%n)));
+                    this.nncartas.getcarta().add(simbolos.get(n+2+n*(k-1)+(((i-1)*(k-1)+j-1)%n)));
                 }
-                cartas.add(nncartas);
+                cartas.add(this.nncartas);
 
                 //nncartas.getcarta().clear();
             }
@@ -87,8 +93,8 @@ public class Cardset implements ICardset  {
             for (i= 0; i<(n*n +n +1); i++){
             cartas_finales.add(cartas.get(i));
         }
-        this.cartas = cartas_finales;
-        Collections.shuffle(this.cartas);
+        cartas = cartas_finales;
+        Collections.shuffle(cartas);
         }
         
         if(!(C ==-1)){

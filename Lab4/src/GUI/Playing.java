@@ -6,6 +6,8 @@
 package GUI;
 
 
+import Model.Cardset;
+import Model.Game;
 import javax.swing.JOptionPane;
 
 
@@ -14,27 +16,59 @@ import javax.swing.JOptionPane;
  * @author ignac
  */
 public class Playing extends javax.swing.JFrame {
-
     /**
-     *
-     * Creates new form Playing
+     * Objeto del tipo Game creado con anterioridad
      */
+    private Game game = CrearGame.game;
+    
+    /**
+     * Objeto del tipo Cardset creado con anterioridad
+     */
+    private Cardset mazo = CrearMazo.mazo;
     public Playing() {
         
         initComponents();
+        /**
+         * Oculta el boton para termianar el programa.
+         */
         Salir.setVisible(false);
-        Mostrartuno.setText("Le corresponde jugar a " + CrearGame.game.dequieneselturno());
-        mostrarcartas.setText("Las cartas sobre el área son: \n" + CrearGame.a1.areat_string());
         
-        Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
+        /**
+         * Muestra en la interfaz a quien le corresponde juagr.
+         */
+        Mostrartuno.setText("Le corresponde jugar a " + this.game.dequieneselturno());
+        
+        /**
+         * Muestra en la interfaz las cartas que estan sobre el área de juego.
+         */
+        mostrarcartas.setText("Las cartas sobre el área son: \n" + this.game.Getarea().areat_string());
+        
+        /**
+         * Muestra en la interfaz el estado del juego
+         * puntos, jugadores, cartas, etc.
+         */
+        Estado.setText(this.game.getJugadores() + "\n Cartas en el mazo: " + this.mazo.getcartas().size() + "\nEl estado del juego es: " + this.game.getEstado() + "\nEl modo de juego es: " + this.game.getModo() );
+        
+        /**
+         * Permite que el usuario no pueda escribir en este textArea.
+         */
         Estado.setEditable(false);
+        
+        /**
+         * Permite que el usuario no pueda escribir en este textArea.
+         */
         mostrarcartas.setEditable(false);
-        if((CrearMazo.mazo.getcartas().size() == 1 || CrearMazo.mazo.getcartas().isEmpty()) && CrearGame.a1.getArea().isEmpty()){
-            CrearGame.game.finish();
-            CrearGame.a1.getArea().clear();
+        
+        /**
+         * Verifica si el area esta vacia y el mazo tiene 1 o 0 cartas,
+         * si sucede termina el juego.
+         */
+        if((this.mazo.getcartas().size() == 1 || this.mazo.getcartas().isEmpty()) && this.game.Getarea().getArea().isEmpty()){
+            this.game.finish();
+            this.game.Getarea().getArea().clear();
             Mostrartuno.setText("Partida terminada!!!");
-            Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
-            JOptionPane.showMessageDialog(null, "El Ganador es: \n" + CrearGame.game.ganador());
+            Estado.setText(this.game.getJugadores() + "\n Cartas en el mazo: " + this.mazo.getcartas().size() + "\nEl estado del juego es: " + this.game.getEstado() + "\nEl modo de juego es: " + this.game.getModo() );
+            JOptionPane.showMessageDialog(null, "El Ganador es: \n" + this.game.ganador());
            Spoit.setVisible(false);
            Pass.setVisible(false);
            Finish.setVisible(false);
@@ -197,14 +231,14 @@ public class Playing extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**
+     * Componente y evento que instancia un objeto del tipo ViewSpoit y hace visible la nueva ventana
+     * @param evt 
+     */
     private void SpoitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SpoitActionPerformed
         // TODO add your handling code here:
-        Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
-        if((CrearMazo.mazo.getcartas().size() == 1 || CrearMazo.mazo.getcartas().isEmpty()) && CrearGame.a1.getArea().isEmpty()){
-            CrearGame.game.finish();
-            Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
-            JOptionPane.showMessageDialog(null, "El Ganador es: \n" + CrearGame.game.ganador()); 
-        }
+        Estado.setText(this.game.getJugadores() + "\n Cartas en el mazo: " + this.mazo.getcartas().size() + "\nEl estado del juego es: " + this.game.getEstado() + "\nEl modo de juego es: " + this.game.getModo() );
         
         ViewSpoit ventanaspoit = new ViewSpoit();
         ventanaspoit.setVisible(true);
@@ -213,25 +247,30 @@ public class Playing extends javax.swing.JFrame {
         
     }//GEN-LAST:event_SpoitActionPerformed
 
+    /**
+     * Componente y evento realiza la jugada pass en el juego actual.
+     * @param evt 
+     */
     private void PassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PassActionPerformed
-        if((CrearMazo.mazo.getcartas().size() == 1 || CrearMazo.mazo.getcartas().isEmpty()) && CrearGame.a1.getArea().isEmpty()){
-            CrearGame.game.finish();
-            Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
-            JOptionPane.showMessageDialog(null, "El Ganador es: \n" + CrearGame.game.ganador()); 
-        }
-        CrearGame.game.pass();
-         Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
-        Mostrartuno.setText("Le corresponde jugar a " + CrearGame.game.dequieneselturno());
+
+        this.game.pass();
+         Estado.setText(this.game.getJugadores() + "\n Cartas en el mazo: " + this.mazo.getcartas().size() + "\nEl estado del juego es: " + this.game.getEstado() + "\nEl modo de juego es: " + this.game.getModo() );
+        Mostrartuno.setText("Le corresponde jugar a " + this.game.dequieneselturno());
     }//GEN-LAST:event_PassActionPerformed
 
+    /**
+     * Componente y evento que realiza la jugada finish en el juego actual,
+     * hace visible al usuario el boton de salir del programa.
+     * @param evt 
+     */
     private void FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinishActionPerformed
         // TODO add your handling code here:
         
-        CrearGame.game.finish();
-        CrearGame.a1.getArea().clear();
-        Estado.setText(CrearGame.game.getJugadores() + "\n Cartas en el mazo: " + CrearMazo.mazo.getcartas().size() + "\nEl estado del juego es: " + CrearGame.game.getEstado() + "\nEl modo de juego es: " + CrearGame.game.getModo() );
+        this.game.finish();
+        this.game.Getarea().getArea().clear();
+        Estado.setText(this.game.getJugadores() + "\n Cartas en el mazo: " + this.mazo.getcartas().size() + "\nEl estado del juego es: " + this.game.getEstado() + "\nEl modo de juego es: " + this.game.getModo() );
         Mostrartuno.setText("Partida terminada!!!");
-        JOptionPane.showMessageDialog(null, "El Ganador es: \n" + CrearGame.game.ganador());
+        JOptionPane.showMessageDialog(null, "El Ganador es: \n" + this.game.ganador());
         Spoit.setVisible(false);
         Pass.setVisible(false);
         Finish.setVisible(false);
@@ -240,6 +279,10 @@ public class Playing extends javax.swing.JFrame {
         
     }//GEN-LAST:event_FinishActionPerformed
 
+    /**
+     * Componente y evento responsables de salir del juego y terminar la ejecución del programa.
+     * @param evt 
+     */
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_SalirActionPerformed

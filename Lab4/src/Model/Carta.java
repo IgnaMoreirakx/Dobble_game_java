@@ -12,7 +12,7 @@ public class Carta implements ICarta {
     /**
      * Representa a una carta, que inicialmente es una carta sin elementos.
      */
-    ArrayList<String> carta = new ArrayList<>();
+    private ArrayList<String> carta = new ArrayList<>();
     
     
     /**
